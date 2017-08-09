@@ -1,0 +1,6 @@
+\\mac\home\documents\visual studio 2017\Projects\Jarvis\Jarvis\obj\Debug\Jarvis.csprojResolveAssemblyReference.cache
+\\mac\home\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Jarvis.exe.config
+\\mac\home\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Jarvis.exe
+\\mac\home\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Jarvis.pdb
+\\mac\home\documents\visual studio 2017\Projects\Jarvis\Jarvis\obj\Debug\Jarvis.exe
+\\mac\home\documents\visual studio 2017\Projects\Jarvis\Jarvis\obj\Debug\Jarvis.pdb

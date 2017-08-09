@@ -1,0 +1,6 @@
+\\mac\home\documents\visual studio 2017\Projects\DrunkPC\DrunkPC\obj\Debug\DrunkPC.csprojResolveAssemblyReference.cache
+\\mac\home\documents\visual studio 2017\Projects\DrunkPC\DrunkPC\bin\Debug\DrunkPC.exe.config
+\\mac\home\documents\visual studio 2017\Projects\DrunkPC\DrunkPC\bin\Debug\DrunkPC.exe
+\\mac\home\documents\visual studio 2017\Projects\DrunkPC\DrunkPC\bin\Debug\DrunkPC.pdb
+\\mac\home\documents\visual studio 2017\Projects\DrunkPC\DrunkPC\obj\Debug\DrunkPC.exe
+\\mac\home\documents\visual studio 2017\Projects\DrunkPC\DrunkPC\obj\Debug\DrunkPC.pdb
