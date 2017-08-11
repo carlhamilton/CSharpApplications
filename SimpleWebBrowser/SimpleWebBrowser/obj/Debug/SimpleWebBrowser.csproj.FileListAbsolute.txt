@@ -1,0 +1,9 @@
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\bin\Debug\SimpleWebBrowser.exe.config
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\bin\Debug\SimpleWebBrowser.exe
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\bin\Debug\SimpleWebBrowser.pdb
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\obj\Debug\SimpleWebBrowser.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\obj\Debug\SimpleWebBrowser.Form1.resources
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\obj\Debug\SimpleWebBrowser.Properties.Resources.resources
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\obj\Debug\SimpleWebBrowser.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\obj\Debug\SimpleWebBrowser.exe
+\\Mac\Home\Documents\Visual Studio 2017\Projects\CSharp\SimpleWebBrowser\SimpleWebBrowser\obj\Debug\SimpleWebBrowser.pdb
