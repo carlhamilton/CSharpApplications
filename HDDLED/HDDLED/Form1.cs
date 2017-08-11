@@ -12,14 +12,14 @@ using System.Management.Instrumentation;
 using System.Collections.Specialized;
 using System.Threading;
 
-namespace HDDLED
+namespace HDDActivity
 {
     public partial class Form1 : Form
     {
         NotifyIcon hddLedIcon;
         Icon activeIcon;
         Icon idleIcon;
-        Thread hddLedWorker;
+        Thread hddActivity;
 
         #region Form Data
         public Form1()
@@ -34,7 +34,7 @@ namespace HDDLED
             hddLedIcon.Visible = true;
 
             //Create all context menu items and add to tray icons
-            MenuItem progNameMenuItem = new MenuItem("HDD LED V1 beta by ChtsiUK");
+            MenuItem progNameMenuItem = new MenuItem("HDD Actibity V1 beta by ChtsiUK");
             MenuItem quitMenuItem = new MenuItem("Quit");
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.MenuItems.Add(progNameMenuItem);
@@ -53,18 +53,18 @@ namespace HDDLED
 
             //Start thread to pull HDD activity
 
-            hddLedWorker = new Thread(new ThreadStart(HddActivityThread));
-            hddLedWorker.Start();
+            hddActivity = new Thread(new ThreadStart(HddActivityThread));
+            hddActivity.Start();
         }
 
         /// <summary>
-        /// Close the application
+        /// Close the application and end the process threads associated with the application
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void QuitMenuItem_Click(object sender, EventArgs e)
         {
-            hddLedWorker.Abort();
+            hddActivity.Abort();
             hddLedIcon.Dispose();
             this.Close();
         }
@@ -76,6 +76,7 @@ namespace HDDLED
         /// </summary>
         public void HddActivityThread()
         {
+            //Accesses the class that provides I/O data so we can detect activity
             ManagementClass driveDataClass = new ManagementClass("win32_PerfFormattedData_PerfDisk_PhysicalDisk");
             try
             {

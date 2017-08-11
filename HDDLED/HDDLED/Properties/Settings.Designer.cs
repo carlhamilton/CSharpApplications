@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HDDLED.Properties
+namespace HDDActivity.Properties
 {
 
 

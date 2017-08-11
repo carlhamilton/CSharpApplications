@@ -4,9 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HDDLED
+/// <summary>
+/// This application is designed to show Hard Drive activity, as many modern machines/laptops no longer show this informaton this litte app brings back that ability.
+/// Built by Carl Hamilton, inspired from the work of Barnacules.
+/// The application takes little resources and can be used at startup. I use this application personally.
+/// Keep an eye on the source available at 
+/// </summary>
+
+namespace HDDActivity
 {
-    static class Program
+    static class HddActivity
     {
         /// <summary>
         /// The main entry point for the application.

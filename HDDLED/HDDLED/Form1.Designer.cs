@@ -1,4 +1,4 @@
-﻿namespace HDDLED
+﻿namespace HDDActivity
 {
     partial class Form1
     {
