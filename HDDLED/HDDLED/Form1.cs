@@ -12,9 +12,17 @@ using System.Management.Instrumentation;
 using System.Collections.Specialized;
 using System.Threading;
 
+/// <summary>
+/// This application is designed to show Hard Drive activity, as many modern machines/laptops no longer show this informaton this litte app brings back that ability.
+/// Built by Carl Hamilton, inspired from the work of Barnacules.
+/// The application takes little resources and can be used at startup. I use this application personally.
+/// Keep an eye on the source available at https://github.com/carlhamilton/CSharpApplications/tree/master/HDDLED/HDDLED I will be adding new features and tracking data as my experience progresses.
+/// contact me at info@chtsi.uk if you have any questions and/or suggestions.
+/// </summary>
+
 namespace HDDActivity
 {
-    public partial class Form1 : Form
+    public partial class invisibleForm : Form
     {
         NotifyIcon hddLedIcon;
         Icon activeIcon;
@@ -22,7 +30,7 @@ namespace HDDActivity
         Thread hddActivity;
 
         #region Form Data
-        public Form1()
+        public invisibleForm()
         {
             InitializeComponent();
             //Load icon files into objects
@@ -32,21 +40,19 @@ namespace HDDActivity
             hddLedIcon = new NotifyIcon();
             hddLedIcon.Icon = idleIcon;
             hddLedIcon.Visible = true;
-
+            #region Context Menu Creation and use
             //Create all context menu items and add to tray icons
             MenuItem progNameMenuItem = new MenuItem("HDD Actibity V1 beta by ChtsiUK");
             MenuItem quitMenuItem = new MenuItem("Quit");
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.MenuItems.Add(progNameMenuItem);
             contextMenu.MenuItems.Add(quitMenuItem);
-
-
+        
             hddLedIcon.ContextMenu = contextMenu;
 
             //wire up the quit button
-
             quitMenuItem.Click += QuitMenuItem_Click;
-            
+            #endregion  
             //Hide the form as it is unused as notification tray application
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
@@ -59,6 +65,7 @@ namespace HDDActivity
 
         /// <summary>
         /// Close the application and end the process threads associated with the application
+        /// without closing the threads the application would crash as the UI would close without the thread processses.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -104,8 +111,7 @@ namespace HDDActivity
                             }
                         }
                     }
-
-
+                    //We add a sleep to the thread to prevent CPU overuse, by adding this sleep we dramatically reduce CPU usage
                     Thread.Sleep(100);
 
                 }
@@ -122,7 +128,7 @@ namespace HDDActivity
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //No use for this function as the form is never used but we need this here due to the nature of our application.
         }
     }
 

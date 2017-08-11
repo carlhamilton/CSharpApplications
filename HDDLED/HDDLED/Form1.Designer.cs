@@ -1,6 +1,6 @@
 ﻿namespace HDDActivity
 {
-    partial class Form1
+    partial class invisibleForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // invisibleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1380, 1013);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "invisibleForm";
+            this.Text = "invisibleForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
