@@ -116,7 +116,7 @@ namespace HDDActivity
 
                 }
 
-            }catch( ThreadAbortException tbe)
+            }catch( ThreadAbortException)
             {
                 //Thread was aborted
                 driveDataClass.Dispose();
