@@ -42,7 +42,7 @@ namespace HDDActivity
             hddLedIcon.Visible = true;
             #region Context Menu Creation and use
             //Create all context menu items and add to tray icons
-            MenuItem progNameMenuItem = new MenuItem("HDD Actibity V1 beta by ChtsiUK");
+            MenuItem progNameMenuItem = new MenuItem("HDD Activity V1 beta by ChtsiUK");
             MenuItem quitMenuItem = new MenuItem("Quit");
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.MenuItems.Add(progNameMenuItem);
