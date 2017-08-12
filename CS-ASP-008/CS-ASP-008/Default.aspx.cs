@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace CS_ASP_008
 {
+   
     public partial class Default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -20,8 +21,8 @@ namespace CS_ASP_008
             int j = int.Parse(i);
             int k = j + 1;
             resultLabel.Text = k.ToString();
-
-            
+ 
         }
     }
 }
+
