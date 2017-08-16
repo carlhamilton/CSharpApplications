@@ -1,0 +1,6 @@
+\\Mac\Home\Documents\Visual Studio 2017\Projects\Dot Net\StringTest\StringTest\bin\Debug\StringTest.exe.config
+\\Mac\Home\Documents\Visual Studio 2017\Projects\Dot Net\StringTest\StringTest\bin\Debug\StringTest.exe
+\\Mac\Home\Documents\Visual Studio 2017\Projects\Dot Net\StringTest\StringTest\bin\Debug\StringTest.pdb
+\\Mac\Home\Documents\Visual Studio 2017\Projects\Dot Net\StringTest\StringTest\obj\Debug\StringTest.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\Visual Studio 2017\Projects\Dot Net\StringTest\StringTest\obj\Debug\StringTest.exe
+\\Mac\Home\Documents\Visual Studio 2017\Projects\Dot Net\StringTest\StringTest\obj\Debug\StringTest.pdb
