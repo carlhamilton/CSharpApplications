@@ -17,7 +17,7 @@ namespace StringTest
             for (int i = 0; i < str.Length; i++)
             {
 
-                Console.WriteLine(str[i] + " Index is at: " + str.IndexOf(str[i]));
+                Console.WriteLine(str[i] + " Index is at: {0}", i);
 
 
 
