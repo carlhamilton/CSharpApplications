@@ -1,6 +1,6 @@
 ﻿namespace BasicCalculator
 {
-    partial class h
+    partial class BasicCalculator
     {
         /// <summary>
         /// Required designer variable.
@@ -299,7 +299,7 @@
             this.CButton.Name = "CButton";
             this.CButton.Size = new System.Drawing.Size(198, 113);
             this.CButton.TabIndex = 1;
-            this.CButton.Text = "C";
+            this.CButton.Text = "Del";
             this.CButton.UseVisualStyleBackColor = true;
             this.CButton.Click += new System.EventHandler(this.CButton_Click);
             // 
@@ -325,7 +325,7 @@
             this.CalculationResultText.TabIndex = 4;
             this.CalculationResultText.Text = "Please enter an equation and press enter or =";
             // 
-            // h
+            // BasicCalculator
             // 
             this.AcceptButton = this.EqualButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -336,7 +336,7 @@
             this.Controls.Add(this.ButtonsPanel);
             this.Controls.Add(this.UserInputText);
             this.MinimumSize = new System.Drawing.Size(500, 520);
-            this.Name = "h";
+            this.Name = "BasicCalculator";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ButtonsPanel.ResumeLayout(false);
             this.ResumeLayout(false);

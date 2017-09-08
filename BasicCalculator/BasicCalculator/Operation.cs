@@ -41,7 +41,7 @@ namespace BasicCalculator
         public Operation()
         {
             // Create an empty string instead of having null
-            this.Lefside = string.Empty;
+            this.LeftSide = string.Empty;
             this.RightSide = string.Empty;
         }
         #endregion

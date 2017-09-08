@@ -1,13 +1,14 @@
-﻿using System;
+﻿using System.Drawing.Text;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace BasicCalculator
 {
-    public partial class h : Form
+    public partial class BasicCalculator : Form
     {
         #region Constructor
-        public h()
+        public BasicCalculator()
         {
             InitializeComponent();
         }
@@ -188,21 +189,87 @@ namespace BasicCalculator
 
 
                 //loop through each character of the input starting from left to right
-                for (int i = 0; i <input.Length; i++)
+                for (int i = 0; i < input.Length; i++)
                 {
                     // TODO: Handle order priority
                     //Example 4 + 5 * 3
                     // It should calculate 5*3 first and then the 4 + the result (so 4 + 15)
 
-                    var myString = "0123456789.";
+                    var numberRange = "0123456789.";
 
-                if (myString.Any(c => input[i] == c))
+                    if (numberRange.Any(c => input[i] == c))
                     {
                         if (leftSide)
-                            operation.Lefside = AddNumberPart(operation.Lefside, input[i]);
+                            operation.LeftSide = AddNumberPart(operation.LeftSide, input[i]);
+                        else operation.RightSide = AddNumberPart(operation.RightSide, input[i]);
+                    }
+                    // Check if the character is an operator ( + - * /)
+                    else if ("+-*/".Any(c => input[i] == c))
+                    {
+                        // If we are on the righ side already, we now need to calculate our current operation
+                        // we set the result to the left side of the next operation
+                        if (!leftSide)
+                        {
+                            //Get operator type
+                            var operatorType = GetOperationType(input[i]);
+
+                            if (operation.RightSide.Length == 0)
+                            {
+                                // Check the operator is nit minus ( as it could be a negaive number
+                                if (operatorType != OperationType.Minus)
+                                    throw new InvalidOperationException($"Operator (+ * / or more than one -) specified without any right side number");
+
+                                // if we got here the operator type is a minus and there is no left number currently, so add the minus to the number
+                                operation.RightSide += input[i];
+                            }
+                            else
+                            {
+                                // 4 + 5 * as an example
+                              
+                                //Calculate previous equation and set the left side
+                                operation.LeftSide = CalculateOperation(operation);
+
+                                //set new operator 
+                                operation.OperationType = operatorType;
+
+                                //Clear the previous right number
+                                operation.RightSide = string.Empty;
+
+
+                            }
+                        }
+                        else
+                        {
+                            //Get operator type
+                            var operatorType = GetOperationType(input[i]);
+                            //Check if we have a left side number
+                            if (operation.LeftSide.Length == 0)
+                            {
+                                // Check the operator is nit minus ( as it could be a negaive number
+                                if (operatorType != OperationType.Minus)
+                                    throw new InvalidOperationException($"Operator (+ * / or more than one -) specified without any left side number");
+
+                                // if we got here the operator type is a minus and there is no left number currently, so add the minus to the number
+                                operation.LeftSide += input[i];
+                            }
+                            else
+                            {
+                                // if we get here we have a left number and now an operator so we want to move to the right side
+
+                                // set the operation type
+                                operation.OperationType = operatorType;
+
+                                //Move to the right side
+                                leftSide = false;
+                            }
+                        }
                     }
                 }
-                return string.Empty;
+
+                // If we are done parsing, and there are no exceptions
+                // calculate the current operation
+                
+                return CalculateOperation(operation);
 
             }
             catch(Exception ex)
@@ -211,6 +278,50 @@ namespace BasicCalculator
             }
             #endregion
 
+
+            
+        }
+
+        /// <summary>
+        /// Calculates an <see cref="Operation"/> and returns the result
+        /// </summary>
+        /// <param name="operation">The operation to calculate</param>
+
+        private string CalculateOperation(Operation operation)
+        {
+            // Store number values of the string representation
+            decimal left = 0;
+            decimal right = 0;
+
+            // Check if we have a valid left side number (not blank string) or if the number is invalid
+            if (string.IsNullOrEmpty(operation.LeftSide) || !decimal.TryParse(operation.LeftSide, out left))
+                throw new InvalidOperationException($"Left side of the operation was not a number. {operation.LeftSide}");
+            // Check if we have a valid right side number (not blank string) or if the number is invalid
+            if (string.IsNullOrEmpty(operation.RightSide) || !decimal.TryParse(operation.RightSide, out right))
+                throw new InvalidOperationException($"Right side of the operation was not a number. {operation.RightSide}");
+
+            try
+            {
+                switch (operation.OperationType)
+                {
+                    case OperationType.Add:
+                        return (left + right).ToString();
+                    case OperationType.Minus:
+                        return (left - right).ToString();
+                    case OperationType.Divide:
+                        return (left / right).ToString();
+                    case OperationType.Multiply:
+                        return (left * right).ToString();
+                    default:
+                        throw new InvalidOperationException($"Unknown operator type when calculating operation {operation.OperationType}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Failed to calculate operation {operation.LeftSide} {operation.OperationType} {operation.RightSide}. {ex.Message}");
+            }
+
+            return string.Empty;
         }
 
         /// <summary>
@@ -229,6 +340,28 @@ namespace BasicCalculator
             
         }
         #endregion
+        
+        /// <summary>
+        /// Accepts a character and returns the known <see cref="OperationType"/>
+        /// </summary>
+        /// <param name="character">The character to parse</param>
+        /// <returns></returns>
+        private OperationType GetOperationType(char character)
+        {
+            switch (character)
+            {
+                case '+':
+                    return OperationType.Add;
+                case '-':
+                    return OperationType.Minus;
+                case '/':
+                    return OperationType.Divide;
+                case '*':
+                    return OperationType.Multiply;
+                default:
+                    throw new InvalidOperationException($"Unknown operator type {character}");
+            }
+        }
 
 
 
