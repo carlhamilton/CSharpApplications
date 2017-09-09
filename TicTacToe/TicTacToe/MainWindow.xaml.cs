@@ -8,35 +8,31 @@ namespace TicTacToe
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// Project by Carl Hamilton to display a simple Tic Tack Toe game.
     /// </summary>
     public partial class MainWindow : Window
     {
-
         #region Private Members
-
 
         /// <summary>
         /// Holds the current results of cells in the active game
         /// </summary>
         private MarkType[] mResults;
 
-
         /// <summary>
         /// True if it is player 1's turn (X) or player 2's turn (O)
         /// </summary>
         private bool mPlayer1Turn;
 
-       /// <summary>
-       /// True if the game ends
-       /// </summary>
-
+        /// <summary>
+        /// True if the game has ended
+        /// </summary>
         private bool mGameEnded;
+
 
         #endregion
 
-
-        #region Constructor 
-
+        #region Constructor
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -45,228 +41,226 @@ namespace TicTacToe
             InitializeComponent();
 
             NewGame();
+
         }
+
 
 
         #endregion
 
-
-        #region Start Game
         /// <summary>
-        /// Starts a new game and clears all values back to the start
+        /// Start a new game and clears all values back to the start
         /// </summary>
-
         private void NewGame()
         {
-            //Create a new blank array of free cells
             mResults = new MarkType[9];
 
-            for (var i = 0; i < mResults.Length; i++)
+            // Set initial value of free for the array (grid) in tic tac toe
+            for (int i = 0; i < mResults.Length; i++)
                 mResults[i] = MarkType.Free;
 
-            //Make sure player 1 starts the game
+            // Make sure that player 1 starts the game
             mPlayer1Turn = true;
 
 
-            // Interate every button on the grid
+            // Iterate every button on the grid
             Container.Children.Cast<Button>().ToList().ForEach(button =>
             {
-                //Change background, foreground and content to default values 
                 button.Content = string.Empty;
-                button.Background = Brushes.White;
-                button.Foreground = Brushes.Blue;
-                
-
+                button.Background = System.Windows.Media.Brushes.Gray;
 
             });
 
-            //Make sure the game hasn't finished
+            //make sure the game hasn't finished
             mGameEnded = false;
         }
-           #endregion
 
-
+        #region Private Functions 
         /// <summary>
         /// Handles a button click event
         /// </summary>
-        /// <param name="sender">The button that was clicked</param>
-        /// <param name="e">the events of the click</param>
+        /// <param name="sender">the button that was clicked</param>
+        /// <param name="e">The event of the click</param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // Check if game has ended
             if (mGameEnded)
             {
                 NewGame();
                 return;
             }
 
-            //Cast the sender to a button
+            // assign the sender to a variable
             var button = (Button)sender;
-
-
-            //Find the buttons position in an array
+            // Find the button's position in the array
             var column = Grid.GetColumn(button);
             var row = Grid.GetRow(button);
+            var index = column + (row * Container.RowDefinitions.Count);
 
-            var index = column + (row * 3);
-
-
-            //Don't do anything if the cell already has a value in it
+            // Don't do anything if the cell already has a value in it
             if (mResults[index] != MarkType.Free)
                 return;
 
-            //Set the cell value based on which players turn it is
-
+            // Set the cell value based on which players turn it it
             mResults[index] = mPlayer1Turn ? MarkType.Cross : MarkType.Nought;
 
-            //Set the button text to the result
-            button.Content = mPlayer1Turn ? "X" : "O";
+            // Show the result
+            switch (mResults[index])
+            {
+                case MarkType.Nought:
+                    button.Content = "O";
+                    button.Foreground = Brushes.GreenYellow;
+                    break;
+                case MarkType.Cross:
+                    button.Content = "X";
+                    button.Foreground = Brushes.Navy;
+                    break;
+            }
 
-            //Change the player 2 result to red
 
-            if (!mPlayer1Turn)
-                button.Foreground = Brushes.Red;
-
-            // Toggle the players turns
+            // Change player turn
             mPlayer1Turn ^= true;
 
-
+            // Check for end of a game or a winner
             CheckForWinner();
-            
 
         }
 
-
         /// <summary>
-        /// Checks if there is a winner of a 3 line straight
+        /// Checks for a winner or a draw, and reset the game
         /// </summary>
         private void CheckForWinner()
         {
 
-
-            #region Horizontal winds
-            // Check for horizonal wins
-            // Row 0
-            //
-            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[1] & mResults[2]) == mResults[0])
-            {
-                //Game ends
-                mGameEnded = true;
-
-                //Highlight winning cells in green
-
-                Button0_0.Background = Button1_0.Background = Button2_0.Background = Brushes.Green;
-            }
-
-            // Row 1
-            //
-            if (mResults[3] != MarkType.Free && (mResults[3] & mResults[4] & mResults[5]) == mResults[3])
-            {
-                //Game ends
-                mGameEnded = true;
-
-                //Highlight winning cells in green
-
-                Button0_1.Background = Button1_1.Background = Button2_1.Background = Brushes.Green;
-            }
-            // Row 2
-            //
-            if (mResults[6] != MarkType.Free && (mResults[6] & mResults[7] & mResults[8]) == mResults[6])
-            {
-                //Game ends
-                mGameEnded = true;
-
-                //Highlight winning cells in green
-
-                Button0_2.Background = Button1_2.Background = Button2_2.Background = Brushes.Green;
-            }
-            #endregion
-
-#region Vertical Wins
-            // Check for vertical wins
-            // Column 0
-            //
-            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[3] & mResults[6]) == mResults[0])
-            {
-                //Game ends
-                mGameEnded = true;
-
-                //Highlight winning cells in green
-
-                Button0_0.Background = Button0_1.Background = Button0_2.Background = Brushes.Green;
-            }
-
-            // Column 1
-            //
-            if (mResults[1] != MarkType.Free && (mResults[1] & mResults[4] & mResults[7]) == mResults[1])
-            {
-                //Game ends
-                mGameEnded = true;
-
-                //Highlight winning cells in green
-
-                Button1_0.Background = Button1_1.Background = Button1_2.Background = Brushes.Green;
-            }// Column 2
-            //
-            if (mResults[2] != MarkType.Free && (mResults[2] & mResults[5] & mResults[8]) == mResults[2])
-            {
-                //Game ends
-                mGameEnded = true;
-
-                //Highlight winning cells in green
-
-                Button2_0.Background = Button2_1.Background = Button2_2.Background = Brushes.Green;
-            }
-            #endregion
-
-            #region Diagonal Wins
-
-            // Check for diagonal wins
-            // Top left bottom right
-            //
-            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[4] & mResults[8]) == mResults[0])
-            {
-                //Game ends
-                mGameEnded = true;
-
-                //Highlight winning cells in green
-
-                Button0_0.Background = Button1_1.Background = Button2_2.Background = Brushes.Green;
-            }
-
-            // Top right to bottom right
-            //
-            if (mResults[2] != MarkType.Free && (mResults[2] & mResults[4] & mResults[6]) == mResults[2])
-            {
-                //Game ends
-                mGameEnded = true;
-
-                //Highlight winning cells in green
-
-                Button2_0.Background = Button1_1.Background = Button0_2.Background = Brushes.Green;
-            }
-
-            #endregion 
-
-
             #region No Winners
-            //Checks for no winner and full board
+
+            // Check for no winner and full board
             if (!mResults.Any(f => f == MarkType.Free))
             {
+                // Game ended
                 mGameEnded = true;
 
-                //turn all cells orange
+                // Turn all cells orange
                 Container.Children.Cast<Button>().ToList().ForEach(button =>
                 {
-                    //Change background, foreground and content to default values 
-
-
                     button.Background = Brushes.Orange;
-
-
-
                 });
+                return;
             }
-             #endregion
+            #endregion
+            else
+                winnerCheck(); // algorithm to check for winner
+
+            #endregion
+
+
+
+        }
+
+        private void winnerCheck()
+        {
+            var winColor = Brushes.Salmon;
+
+            // initiating the strings that will be checked if it has similar characters
+            string rowCheck = string.Empty;
+            string colCheck = string.Empty;
+            string diagCheck = string.Empty;
+            string inverseDiagCheck = string.Empty;
+
+            // iterating throughout the matrix
+            for (int i = 0; i < mResults.Length / 3; i++)
+            {
+                for (int k = 0; k < mResults.Length / 3; k++)
+                {
+                    // Check if we have vertical winner
+                    colCheck += GetCellContent(i, k);
+                    if ((!colCheck.Contains("X") || !colCheck.Contains("O")) & colCheck.Length >= 3)
+                    {
+                        mGameEnded = true;
+                        // Show message for the winner 
+                        ShowWinnerMessage();
+                        ShowFinalMessage();
+                        return;
+                    }
+
+                    //Check if we have horizontal winner 
+                    rowCheck += GetCellContent(k, i);
+                    if ((!rowCheck.Contains("X") || !rowCheck.Contains("O")) & rowCheck.Length >= 3)
+                    {
+                        mGameEnded = true;
+                        // Show message for the winner 
+                        ShowWinnerMessage();
+                        ShowFinalMessage();
+                        return;
+                    }
+
+
+
+                }
+                rowCheck = string.Empty;
+                colCheck = string.Empty;
+
+                // Check if we have normal diagonal winner
+                diagCheck += GetCellContent(i, i);
+                if ((!diagCheck.Contains("X") || !diagCheck.Contains("O")) & diagCheck.Length >= 3)
+                {
+                    mGameEnded = true;
+                    // Show message for the winner 
+                    ShowWinnerMessage();
+                    ShowFinalMessage();
+
+                    return;
+
+                }
+
+                // Check if we have inverse diagonal winner
+                inverseDiagCheck += GetCellContent(i, (mResults.Length / 3) - 1 - i);
+                if ((!inverseDiagCheck.Contains("X") || !inverseDiagCheck.Contains("O")) & inverseDiagCheck.Length >= 3)
+                {
+                    mGameEnded = true;
+                    // Show message for the winner 
+                    ShowWinnerMessage();
+                    ShowFinalMessage();
+
+                    return;
+
+                }
+
+
+            }
+        }
+
+        private static void ShowFinalMessage()
+        {
+            MessageBox.Show("Press any square to start a new game");
+        }
+
+        /// <summary>
+        /// method to check who is the winner and return a message 
+        /// </summary>
+        private void ShowWinnerMessage()
+        {
+            switch (mPlayer1Turn)
+            {
+                case true:
+
+                    MessageBox.Show("Player 2 Wins !!!");
+                    break;
+                case false:
+                    MessageBox.Show("Player 1 Wins !!!");
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// method to get cell value based on row/column 
+        /// </summary>
+        /// <param name="C1"></param>
+        /// <param name="C2"></param>
+        /// <returns></returns>
+        string GetCellContent(int C1, int C2)
+        {
+            return Container.Children.Cast<Button>().First(e => Grid.GetRow(e) == C1 && Grid.GetColumn(e) == C2).Content.ToString();
         }
     }
 }
