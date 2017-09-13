@@ -1,6 +1,0 @@
-\\mac\home\documents\visual studio 2017\Projects\8Ball\8Ball\bin\Debug\8Ball.exe.config
-\\mac\home\documents\visual studio 2017\Projects\8Ball\8Ball\bin\Debug\8Ball.exe
-\\mac\home\documents\visual studio 2017\Projects\8Ball\8Ball\bin\Debug\8Ball.pdb
-\\mac\home\documents\visual studio 2017\Projects\8Ball\8Ball\obj\Debug\8Ball.csprojResolveAssemblyReference.cache
-\\mac\home\documents\visual studio 2017\Projects\8Ball\8Ball\obj\Debug\8Ball.exe
-\\mac\home\documents\visual studio 2017\Projects\8Ball\8Ball\obj\Debug\8Ball.pdb
